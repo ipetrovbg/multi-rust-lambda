@@ -12,6 +12,6 @@ plugins:
 
 functions:
   hello:
-    handler: hello
+    handler: ./target/x86_64-unknown-linux-musl/release/hello
   world:
-    handler: world
+    handler: ./target/x86_64-unknown-linux-musl/release/world
