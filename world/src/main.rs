@@ -1,6 +1,7 @@
 use lambda_runtime::{handler_fn, Context};
-use serde_json::json;
 use serde::Serialize;
+use serde_json::json;
+
 type Error = Box<dyn std::error::Error + Sync + Send + 'static>;
 
 #[derive(Serialize)]
@@ -16,7 +17,7 @@ pub struct ApiGatewayEvent {
 
 #[derive(Deserialize)]
 pub struct Event {
-    pub message: String
+    pub message: String,
 }
 
 #[tokio::main]
@@ -31,6 +32,6 @@ async fn world(_: ApiGatewayEvent, _: Context) -> Result<SimpleResponse, Error> 
     // creating an application/json response
     Ok(SimpleResponse {
         name: "world".to_string(),
-        message: "World custom message".to_string()
+        message: "World custom message".to_string(),
     })
 }
