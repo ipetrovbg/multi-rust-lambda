@@ -1,6 +1,5 @@
 use lambda_runtime::{handler_fn, Context};
-use serde::Serialize;
-use serde_json::json;
+use serde::{Deserialize, Serialize};
 
 type Error = Box<dyn std::error::Error + Sync + Send + 'static>;
 
