@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Rust
-        uses: hecrj/setup-rust-action@v1
+        uses: hecrj/setup-rust-action@v1.0.5
         with:
           components: rustfmt
       - uses: actions/checkout@v2
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Rust
-        uses: hecrj/setup-rust-action@v1
+        uses: hecrj/setup-rust-action@v1.0.5
         with:
           components: clippy
       - uses: actions/checkout@v2
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Rust
-        uses: hecrj/setup-rust-action@v1
+        uses: hecrj/setup-rust-action@v1.0.5
       - uses: actions/checkout@v2
       - run: cargo check --all
 
@@ -43,11 +43,12 @@ jobs:
 #        run: cargo test
 
   deploy:
+    needs: [codestyle, lint, compile]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Set up Rust
-        uses: hecrj/setup-rust-action@v1
+        uses: hecrj/setup-rust-action@v1.0.5
       - name: Checkout
         uses: actions/checkout@v2
       - name: Deploy
