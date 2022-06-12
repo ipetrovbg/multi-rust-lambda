@@ -1,0 +1,17 @@
+service: ${file(./package.json):name}
+provider:
+  name: aws
+  runtime: rust
+  memorySize: 128
+
+package:
+  individually: true
+
+plugins:
+  - serverless-rust
+
+functions:
+  hello:
+    handler: hello
+  world:
+    handler: world

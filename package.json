@@ -1,0 +1,14 @@
+{
+  "name": "multi-rust-lambda",
+  "version": "1.0.0",
+  "description": "Multi Rust Lambdas project",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless": "^3.19.0",
+    "serverless-rust": "^0.3.8"
+  }
+}
