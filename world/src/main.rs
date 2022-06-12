@@ -1,37 +1,36 @@
-use lambda_http::{handler, lambda, IntoResponse, Request, Context};
+use lambda_runtime::{handler_fn, Context};
 use serde_json::json;
-
+use serde::Serialize;
 type Error = Box<dyn std::error::Error + Sync + Send + 'static>;
 
+#[derive(Serialize)]
+pub struct SimpleResponse {
+    pub name: String,
+    pub message: String,
+}
+
+#[derive(Deserialize)]
+pub struct ApiGatewayEvent {
+    pub body: Event,
+}
+
+#[derive(Deserialize)]
+pub struct Event {
+    pub message: String
+}
+
 #[tokio::main]
-async fn main() -> Result<(), Error> {
-    lambda::run(handler(world)).await?;
+async fn main() -> Result<(), lambda_runtime::Error> {
+    let handler_callback = handler_fn(world);
+    lambda_runtime::run(handler_callback).await?;
     Ok(())
 }
 
-async fn world(_: Request, _: Context) -> Result<impl IntoResponse, Error> {
+async fn world(_: ApiGatewayEvent, _: Context) -> Result<SimpleResponse, Error> {
     // `serde_json::Values` impl `IntoResponse` by default
     // creating an application/json response
-    Ok(json!({
-    "message": "Go Serverless v1.0! Your function executed successfully!!!!"
-    }))
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[tokio::test]
-    async fn world_handles() {
-        let request = Request::default();
-        let expected = json!({
-        "message": "Go Serverless v1.0! Your function executed successfully!!!!"
-        })
-            .into_response();
-        let response = world(request, Context::default())
-            .await
-            .expect("expected Ok(_) value")
-            .into_response();
-        assert_eq!(response.body(), expected.body())
-    }
+    Ok(SimpleResponse {
+        name: "world".to_string(),
+        message: "World custom message".to_string()
+    })
 }
