@@ -76,7 +76,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: build
-          args: --release
+          args: --release --workspace
 #        with:
 #          args: cargo build --target $BUILD_TARGET --release
       - uses: actions/upload-artifact@v2
