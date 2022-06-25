@@ -3,6 +3,11 @@ provider:
   name: aws
   runtime: rust
   memorySize: 128
+  region: eu-central-1
+
+custom:
+  rust:
+    dockerless: true
 
 package:
   individually: true
