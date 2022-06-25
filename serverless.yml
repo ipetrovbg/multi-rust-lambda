@@ -12,8 +12,8 @@ provider:
 package:
   individually: true
 
-#plugins:
-#  - serverless-rust
+plugins:
+  - ./serverless-rust.js
 
 functions:
   hello:
