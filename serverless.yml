@@ -1,19 +1,19 @@
 service: ${file(./package.json):name}
 provider:
   name: aws
-  runtime: rust
+  runtime: provided
   memorySize: 128
   region: eu-central-1
 
-custom:
-  rust:
-    dockerless: true
+#custom:
+#  rust:
+#    dockerless: true
 
 package:
   individually: true
 
-plugins:
-  - serverless-rust
+#plugins:
+#  - serverless-rust
 
 functions:
   hello:
