@@ -97,6 +97,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm install
+      - run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 #      - uses: actions/download-artifact@v2
 #        with:
 #          name: multi-rust-lambda-artifact
