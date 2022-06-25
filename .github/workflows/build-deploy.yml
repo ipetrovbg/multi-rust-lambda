@@ -75,16 +75,16 @@ jobs:
       - name: Build
         uses: actions-rs/cargo@v1
         with:
-          command: build
-          args: --release --workspace
+          command: check
+          args: --all
 #        with:
 #          args: cargo build --target $BUILD_TARGET --release
-      - uses: actions/upload-artifact@v2
-        with:
-          name: multi-rust-lambda-artifact
-          path: |
-            target/release/hello
-            target/release/world
+#      - uses: actions/upload-artifact@v2
+#        with:
+#          name: multi-rust-lambda-artifact
+#          path: |
+#            target/release/hello
+#            target/release/world
 
   deploy:
     name: Deploy
@@ -96,10 +96,10 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm install
-      - uses: actions/download-artifact@v2
-        with:
-          name: multi-rust-lambda-artifact
-          path: target/release
+#      - uses: actions/download-artifact@v2
+#        with:
+#          name: multi-rust-lambda-artifact
+#          path: target/release
 
 
       - name: Serverless deploy
