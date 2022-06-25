@@ -96,8 +96,15 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          override: true
+          target: x86_64-unknown-linux-musl
+          components: rustfmt, clippy
       - run: npm install
-      - run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+#      - run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 #      - uses: actions/download-artifact@v2
 #        with:
 #          name: multi-rust-lambda-artifact
