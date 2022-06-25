@@ -58,7 +58,6 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  BUILD_TARGET: x86_64-unknown-linux-musl
 
 jobs:
   build:
@@ -66,17 +65,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Compile
-        uses: gmiam/rust-musl-action@master
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
         with:
-          args: cargo build --target $BUILD_TARGET --release
+          toolchain: nightly
+          override: true
+          components: rustfmt, clippy
+      - name: Build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release
+#        with:
+#          args: cargo build --target $BUILD_TARGET --release
       - uses: actions/upload-artifact@v2
         with:
           name: multi-rust-lambda-artifact
           path: |
-            target/${{ env.BUILD_TARGET }}/release/hello
-            target/${{ env.BUILD_TARGET }}/release/world
-#          target/${{ env.BUILD_TARGET }}/release/${{ env.BINARY_NAME }}
+            target/release/hello
+            target/release/world
 
   deploy:
     name: Deploy
@@ -87,7 +94,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: multi-rust-lambda-artifact
-          path: target/${{ env.BUILD_TARGET }}/release
+          path: target/release
 
 #      - name: Move binaries
 #        run: mv target/${{ env.BUILD_TARGET }}/release/${{ env.BINARY_NAME }} bootstrap
