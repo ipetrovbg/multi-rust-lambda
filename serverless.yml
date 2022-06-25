@@ -15,6 +15,9 @@ package:
 plugins:
   - serverless-rust
 
+custom:
+  dockerless: true
+
 functions:
   hello:
     handler: hello
