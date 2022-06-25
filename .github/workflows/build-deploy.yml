@@ -58,6 +58,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  NODE_VERSION: '14.18.2'
 
 jobs:
   build:
@@ -95,6 +96,12 @@ jobs:
         with:
           name: multi-rust-lambda-artifact
           path: target/release
+      - name: Use Node.js ${{env.NODE_VERSION}}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+        - name: Install dependencies
+          run: npm install
 
 #      - name: Move binaries
 #        run: mv target/${{ env.BUILD_TARGET }}/release/${{ env.BINARY_NAME }} bootstrap

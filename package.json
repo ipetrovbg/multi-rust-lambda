@@ -7,7 +7,7 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "serverless": "^3.19.0",
     "serverless-rust": "^0.3.8"
   }
