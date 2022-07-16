@@ -1,0 +1,6 @@
+services:
+  hello:
+    path: hello
+
+  world:
+    path: world

@@ -1,0 +1,13 @@
+service: hello
+provider:
+  name: aws
+  runtime: provided
+  memorySize: 128
+  region: eu-central-1
+
+package:
+  individually: true
+
+functions:
+  hello:
+    handler: bootstrap
