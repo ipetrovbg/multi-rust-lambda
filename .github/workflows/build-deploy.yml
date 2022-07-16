@@ -40,6 +40,7 @@ jobs:
           args: --release --target=x86_64-unknown-linux-musl -p world
       - run: mv target/x86_64-unknown-linux-musl/release/bootstrap world/bootstrap
       - run: npm install
+      - run: npm install -g serverless
       - name: Serverless deploy
         uses: serverless/github-action@v3.1
         with:
