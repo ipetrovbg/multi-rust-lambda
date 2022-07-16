@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
       - name: Setup Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -38,6 +39,7 @@ jobs:
           command: build
           args: --release --target=x86_64-unknown-linux-musl -p world
       - run: mv target/x86_64-unknown-linux-musl/release/bootstrap world/bootstrap
+      - run: npm install
       - name: Serverless deploy
         uses: serverless/github-action@v3.1
         with:
