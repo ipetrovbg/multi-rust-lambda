@@ -11,3 +11,9 @@ package:
 functions:
   hello:
     handler: bootstrap
+    package:
+      individually: true
+      exclude:
+        - '**/**'
+      include:
+        - ./bootstrap
